@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrari F1 // Interactive 3D Showcase - Apex Studio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏎️</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Three.js Modern Import Map -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- 3D Canvas Viewport -->
+    <div id="canvas-container"></div>
+
+    <!-- Cinematic Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="brand-badge">Apex Grand Prix</div>
+            <div class="loading-title">FERRARI F1 // SHOWROOM</div>
+            <div class="progress-track">
+                <div id="loading-progress-bar" class="progress-fill"></div>
+            </div>
+            <div id="loading-status-text" class="status-label">LOADING VEHICLE...</div>
+        </div>
+    </div>
+
+    <!-- Interactive Studio HUD -->
+    <div id="hud-container">
+        <!-- Top Bar: Studio Brand & Environment Selector -->
+        <div class="hud-top-bar">
+            <div class="studio-brand">
+                <div class="brand-series">Apex Studio // F1 Showcase</div>
+                <div class="studio-title">INTERACTIVE VEHICLE PRESENTATION</div>
+            </div>
+
+            <div class="studio-customizer">
+                <!-- Lighting Atmosphere Selector -->
+                <div class="panel-chip">
+                    <span class="chip-label">Atmosphere</span>
+                    <div class="chip-group">
+                        <button class="option-btn lighting-btn active" data-lighting="dark">Obsidian Dark</button>
+                        <button class="option-btn lighting-btn" data-lighting="white">Clean White</button>
+                        <button class="option-btn lighting-btn" data-lighting="neon">Cyber Neon</button>
+                        <button class="option-btn lighting-btn" data-lighting="golden">Golden Hour</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar: Showcase Actions & 8 Camera Presets -->
+        <div class="hud-bottom-bar">
+            <!-- Action Row -->
+            <div class="action-row">
+                <button id="btn-rotate" class="action-pill" title="Toggle Turntable Auto-Rotation (T)">
+                    <span class="icon">🔄</span> Auto Rotate
+                </button>
+                <button id="btn-reset-cam" class="action-pill" title="Reset to Hero Overview (R)">
+                    <span class="icon">🎯</span> Reset View
+                </button>
+                <button id="btn-fullscreen" class="action-pill" title="Toggle Fullscreen Mode (F)">
+                    <span class="icon" id="fullscreen-icon">⛶</span> Fullscreen
+                </button>
+            </div>
+
+            <!-- 8 Professional Camera Presets Dock -->
+            <div class="camera-dock" role="toolbar" aria-label="Camera Presets">
+                <button class="preset-btn active" data-preset="overview">1. Overview</button>
+                <button class="preset-btn" data-preset="front-three-quarter">2. Front 3/4</button>
+                <button class="preset-btn" data-preset="front">3. Front</button>
+                <button class="preset-btn" data-preset="side">4. Side</button>
+                <button class="preset-btn" data-preset="rear-three-quarter">5. Rear 3/4</button>
+                <button class="preset-btn" data-preset="rear">6. Rear</button>
+                <button class="preset-btn" data-preset="top">7. Top</button>
+                <button class="preset-btn" data-preset="cockpit">8. Cockpit / Detail</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Clean View & Help Controls -->
+    <div class="floating-tools">
+        <button id="btn-shortcuts" class="tool-btn" title="Keyboard Shortcuts">⌨ Shortcuts</button>
+        <button id="btn-hide-ui" class="tool-btn" title="Toggle Interface HUD (H)">✖ Hide HUD</button>
+    </div>
+
+    <!-- Shortcut Hint Tooltip -->
+    <div id="shortcut-popup" class="shortcut-hint">
+        <div class="popup-title">Showroom Controls</div>
+        <kbd>Left Drag</kbd> Orbit Around Vehicle<br>
+        <kbd>Right Drag</kbd> Pan Studio View<br>
+        <kbd>Scroll Wheel</kbd> Zoom In / Out<br>
+        <kbd>1</kbd> - <kbd>8</kbd> Camera Presets<br>
+        <kbd>T</kbd> Toggle Auto-Rotation<br>
+        <kbd>R</kbd> Reset Hero View<br>
+        <kbd>F</kbd> Toggle Fullscreen<br>
+        <kbd>H</kbd> Toggle HUD Visibility
+    </div>
+
+    <script>
+        // Shortcuts tooltip management
+        const scBtn = document.getElementById('btn-shortcuts');
+        const scPopup = document.getElementById('shortcut-popup');
+
+        if (scBtn && scPopup) {
+            scBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                scPopup.classList.toggle('visible');
+            });
+        }
+        document.addEventListener('click', () => {
+            if (scPopup) scPopup.classList.remove('visible');
+        });
+    </script>
+
+    <!-- Main Application Entrypoint -->
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>

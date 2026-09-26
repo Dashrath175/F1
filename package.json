@@ -1,0 +1,14 @@
+{
+  "name": "apex-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "lint": "node scripts/lint.js",
+    "test": "node scripts/lint.js"
+  },
+  "dependencies": {
+    "three": "^0.160.0"
+  }
+}
